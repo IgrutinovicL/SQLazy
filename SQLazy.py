@@ -1,7 +1,5 @@
 import sqlite3
 
-
-
 def CreateDatabase(name):
     """
     Creates a new database if it does not excist. Returns a connection.
@@ -12,11 +10,10 @@ def CreateDatabase(name):
         return sqlite3.connect(name+'.db')
 def CreateTable(connection,tableName,dict):
     """
-    Creates a new table in the database provided. Everything can be NULL.
+    Creates a new table in the database provided. Everything can be NULL. Requires a dictionary. Returns table name.
     """
     command = f"CREATE TABLE IF NOT EXISTS {tableName} (id INTEGER PRIMARY KEY, "
     p1 = ""
-
     for key,value in dict.items():
         if " " not in value:
             value = list(value)
@@ -32,16 +29,14 @@ def CreateTable(connection,tableName,dict):
     p1 = p1[:-1]
     command += p1
     command += ");"
-    print (command)
-
+    print ("Executing command -> ",command)
     cursor = connection.cursor()
     try:
         cursor.execute(command)
         connection.commit()
+        return tableName
     except Exception as e:
         print(e)
-
-
 def InsertIntoTable(connection,tableName,dict):
     """
     Inserts a single row into a table. Requires a dictionary.
@@ -66,16 +61,26 @@ def InsertIntoTable(connection,tableName,dict):
         connection.commit()
     except Exception as e:
         print(e)
-    
-
-
-
-
 def SearchForId(connection,tableName,id):
     """
-    Returns * from that column.
+    Returns * from that id. If nothing found returns an empty list.
     """
     command = f"SELECT * FROM {tableName} WHERE id={id}"
     cursor = connection.cursor()
-    cursor.execute(command)
-    return cursor.fetchall()
+    print("Executing command -> ",command)
+    try:
+        cursor.execute(command)
+        return cursor.fetchall()
+    except Exception as e:
+        print(e)
+        return []
+
+
+# SEARCH FOR VALUE WHERE KEY = VALUE {key:value}
+
+
+
+if __name__ == "__main__":
+    print("Luka Igrutinovic is cool!")
+
+#         ^Just an easter egg^
