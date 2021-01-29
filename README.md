@@ -17,7 +17,7 @@ conn = SQLazy.CreateDatabase("test.db")
 - Create a table:
 ```python
 structure = {"USERNAME":"VARCHAR(20)","PASSWORD":"VARCHAR(20)","POINTS":"INTEGER"}
-SQLazy.CreateTable(conn,"testTable",structure)
+table     = SQLazy.CreateTable(conn,"testTable",structure)
 
 ```
 - Insert values into a table:
