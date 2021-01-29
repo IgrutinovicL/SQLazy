@@ -1,5 +1,6 @@
 # SQLazy
 Do you find yourself googling for SQLITE queries all of the time? Well if you would like to avoid that part this is the solution.
+#### ALPHA
 
 
 ## Examples
