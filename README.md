@@ -21,6 +21,6 @@ SQLazy.CreateTable(conn,"testTable",structure)
 ```
 - Insert values into a table:
 ```python
-vals      = {"USERNAME":"LukaIgrutinovic","PASSWORD":"Gru","POINTS":50}
+vals      = {"USERNAME":"default","PASSWORD":"default","POINTS":50}
 SQLazy.InsertIntoTable(conn,"testTable",vals)
 ```
