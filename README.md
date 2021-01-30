@@ -29,6 +29,6 @@ vals      = {"USERNAME":"default","PASSWORD":"default","POINTS":50}
 SQLazy.InsertIntoTable(conn,"testTable",vals)
 ```
 OR
-```
+```python
 SQLazy.InsertIntoTable(conn,table,vals)
 ```
