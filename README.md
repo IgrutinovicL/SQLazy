@@ -3,7 +3,7 @@ Do you find yourself googling for SQLITE queries all of the time? Well if you wo
 
 -One thing you should note is that this is not to replace all of SQLITE3 syntax but to make it easier to do the repetitive stuff.
 
-#### ALPHA
+#### VERSION -> alpha 
 
 
 ## Examples
