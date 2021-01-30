@@ -39,7 +39,7 @@ def CreateTable(connection,tableName,dict):
         print(e)
 def InsertIntoTable(connection,tableName,dict):
     """
-    Inserts a single row into a table. Requires a dictionary.
+    Inserts a single row into a table. Requires a dictionary. Returns True if successfull.
     """
     command = f"INSERT INTO {tableName}(id, "
     p1 = ""
@@ -55,13 +55,40 @@ def InsertIntoTable(connection,tableName,dict):
     p2 += ')'
     command += p1 + p2 +';'
     cursor = connection.cursor()
+
     print("Executing command -> ",command)
+
+    try:
+        cursor.execute(command,variables)
+        connection.commit()
+        return True
+    except Exception as e:
+        print(e)
+        return False
+def UpdateWhereId(connection,tableName,id,dict):
+    """
+    Updates variables where id.
+    """    
+    command = f"UPDATE {tableName} SET "
+    p1 = ""
+    variables = []
+    for key, value in dict.items():
+        p1 += key + '=' + '? ' + ','
+        variables.append(value)
+    p1=p1[:-1]
+    command += p1  + "WHERE id = " + str(id)
+
+    print("Executing command -> ",command)
+
+    cursor = connection.cursor()
     try:
         cursor.execute(command,variables)
         connection.commit()
     except Exception as e:
         print(e)
-def SearchForId(connection,tableName,id):
+
+
+def SearchById(connection,tableName,id):
     """
     Returns * from that id. If nothing found returns an empty list.
     """
