@@ -102,10 +102,43 @@ def SearchById(connection,tableName,id):
         print(e)
         return []
 
-
 # SEARCH FOR VALUE WHERE KEY = VALUE {key:value}
+def SearchByValue(connection,tableName,column,value):
+    """
+    Returns id of first found value. If not found returns -1.
+    """
+    command = f"SELECT id FROM {tableName} WHERE {column} = ?"
+    cursor = connection.cursor()
+    print("Executing command -> ",command)
+    try:
+        cursor.execute(command,(value,))
+        return cursor.fetchone()[0]
+    except Exception as e:
+        print(e)
+        return -1
 
-
+def CustomCommand(connection,command,vals):
+    """
+    Executes a command you give it in SQLITE format. Please use ? for variable places...
+    """
+    cursor = connection.cursor()
+ 
+    
+    if "INSERT" or "UPDATE" or "CREATE" in command:
+        try:
+            cursor.execure(command,vals)
+            connection.commit()
+            return True
+        except Exception as e:
+            print(e)
+            return False
+    else:
+        try:
+            cursor.execure(command,vals)
+            return cursor.fetchall()
+        except Exception as e:
+            print(e)
+            return []
 
 if __name__ == "__main__":
     print("Luka Igrutinovic is cool!")
